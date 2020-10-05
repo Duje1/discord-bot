@@ -1,3 +1,5 @@
+## PYTHON 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -28,8 +30,7 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+#  Usually these files are written by a python script from a template #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -127,3 +128,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+
+## VIM EDITOR
+
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
