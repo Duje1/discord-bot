@@ -21,7 +21,7 @@ Finally, click the the "copy" button next to the url link in the upper group box
 
 If you haven't already (if you're viewing this online), clone this repo. Then, switch to this branch (`token_testing`)-  `git checkout token_testing`.  Once on this branch, you'll find the bot's source code in `/src/bot.py`.
 
-Modify the source code in `bot.py` to change the USERNAME global variable to your name, so that the bot will ping you specifically in its startup message (demonstrating that you got your test instance working).
+Modify the source code in `bot.py` to change the USERNAME global variable to your name, so that the bot will address you specifically in its startup message (demonstrating that you got your test instance working).
 
 Lastly, set an environment variable, `TEST_BOT_TOKEN`, with the value of the token you copied earlier in the setup / registration. In Linux, you can set this value in your `~/.bashrc`.  In linux, you must `export` a variable to make it propogate to child processes, in windows `set` will only set the variable for the current process, and you will need to use `setx` similarly to `export` in Linux.
 
