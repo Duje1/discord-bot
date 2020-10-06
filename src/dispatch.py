@@ -47,21 +47,22 @@ class Dispatcher(object):
 		if not text.startswith(COMMAND_PREFIX):
 			return
 
-		args = self.parser.parse_args(shlex.split(text))
-		
-		if not check_scope(msg, args.cls.channels, args.cls.categories):
-			return
-
-		if not check_roles(msg, args.cls.roles):
-			await msg.channel.send("You do not have permission for this command")
-			return
-
 		try:
+			args = self.parser.parse_args(shlex.split(text))
+			
+			if not check_scope(msg, args.cls.channels, args.cls.categories):
+				return
+
+			if not check_roles(msg, args.cls.roles):
+				await msg.channel.send("You do not have permission for this command")
+				return
+
 			command = args.cls(self.client, msg)
 			await command.execute(args)
 		except CommandParsingError as error:
 			await msg.channel.send(error.message)
 			await msg.add_reaction(u"\u274C")
+			return
 		except Exception as error:
 			error_message = format_exc()
 			await msg.add_reaction(u"\u274C")
