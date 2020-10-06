@@ -1,3 +1,5 @@
+from random import choice
+
 from command import Command
 
 def max20(val):
@@ -18,3 +20,15 @@ class DeleteMsg(Command):
 		async for message in self.msg.channel.history(limit=args.count+1):
 			await message.delete()
 		
+
+class ChooseOption(Command):
+	name = "choose"
+
+	@classmethod
+	def register_parameters(cls, prefix, subparsers):
+		parser = cls.create_parser(prefix, subparsers)
+		parser.add_argument('options', nargs='*', type=str, help="Space-separated options to randomly choose from")
+
+	async def execute(self, args):
+		option = choice(args.options)
+		await self.msg.channel.send(f"Randomly selected: {option}")

@@ -6,10 +6,11 @@ import shlex
 from discord.errors import NotFound
 
 from permissions import check_roles, check_scope
-from commands.general import DeleteMsg
+from commands.general import DeleteMsg, ChooseOption
 
 COMMANDS = [
 	DeleteMsg,
+	ChooseOption,
 ]
 
 COMMAND_PREFIX = "/"
