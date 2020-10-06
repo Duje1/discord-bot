@@ -13,9 +13,9 @@ def check_scope(msg, channels, categories):
 	if not channels and not categories:
 		return True
 
-	if channels and msg.channel_id in channels:
+	if channels and msg.channel.id in channels:
 		return True
 
-	category_id = getattr(getattr(msg, 'category', None), 'id', None)
+	category_id = getattr(msg.channel, 'category_id', None)
 	return categories and category_id in categories
 

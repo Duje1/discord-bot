@@ -1,6 +1,7 @@
 from random import choice
 
 from command import Command
+from server import ROLE_TESTROLE, CHANNEL_1, CATEGORY_TEST
 
 def max20(val):
 	num = int(val)
@@ -10,7 +11,7 @@ def max20(val):
 
 class DeleteMsg(Command):
 	name = "deletemsg"
-	
+
 	@classmethod
 	def register_parameters(cls, prefix, subparsers):
 		parser = cls.create_parser(prefix, subparsers)
