@@ -28,7 +28,7 @@ class ChooseOption(Command):
 	@classmethod
 	def register_parameters(cls, prefix, subparsers):
 		parser = cls.create_parser(prefix, subparsers)
-		parser.add_argument('options', nargs='*', type=str, help="Space-separated options to randomly choose from")
+		parser.add_argument('options', nargs='+', type=str, help="Space-separated options to randomly choose from")
 
 	async def execute(self, args):
 		option = choice(args.options)
