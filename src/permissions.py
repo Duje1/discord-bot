@@ -17,5 +17,5 @@ def check_scope(msg, channels, categories):
 		return True
 
 	category_id = getattr(getattr(msg, 'category', None), 'id', None)
-	return category and category_id in categories
+	return categories and category_id in categories
 
