@@ -8,9 +8,10 @@ class Command(ABC):
 	categories = []
 	delete_msg = False
 
-	def __init__(self, client, msg):
+	def __init__(self, client, msg, dispatcher):
 		self.client = client
 		self.msg = msg
+		self.dispatcher = dispatcher
 
 	@classmethod
 	@abstractmethod
