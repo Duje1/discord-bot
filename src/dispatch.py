@@ -6,16 +6,22 @@ import shlex
 from discord.errors import NotFound
 
 from permissions import check_roles, check_scope
-from commands.general import DeleteMsg, ChooseOption
+from commands.general import DeleteMsg, ChooseOption, ShowHelp, ShowUsage
 
 COMMANDS = [
 	DeleteMsg,
 	ChooseOption,
+	ShowHelp,
+	ShowUsage,
 ]
 
 COMMAND_PREFIX = "/"
 
 class CommandParsingError(Exception):
+	def __init__(self, message):
+		self.message = message
+
+class CommandHelpError(Exception):
 	def __init__(self, message):
 		self.message = message
 
@@ -28,16 +34,16 @@ class CommandParser(ArgumentParser):
 
 	def print_help(self, file=None):
 		message = self.format_help()
-		raise CommandParsingError(message)
+		raise CommandHelpError(message)
 
 	def print_usage(self, file=None):
 		message = self.format_usage()
-		raise CommandParsingError(message)
+		raise CommandHelpError(message)
 
 class Dispatcher(object):
 	def __init__(self, client):
 		self.client = client
-		self.parser = CommandParser(allow_abbrev=False)
+		self.parser = CommandParser(prog="", allow_abbrev=False)
 		subparsers = self.parser.add_subparsers()
 
 		for command in COMMANDS:
@@ -63,6 +69,10 @@ class Dispatcher(object):
 		except CommandParsingError as error:
 			await msg.channel.send(error.message)
 			await msg.add_reaction(u"\u274C")
+			return
+		except CommandHelpError as error:
+			await msg.channel.send(error.message)
+			await msg.add_reaction(u"\u2705")
 			return
 		except Exception as error:
 			error_message = format_exc()

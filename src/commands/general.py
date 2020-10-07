@@ -33,3 +33,25 @@ class ChooseOption(Command):
 	async def execute(self, args):
 		option = choice(args.options)
 		await self.msg.channel.send(f"Randomly selected: {option}")
+
+class ShowHelp(Command):
+	name = "help"
+
+	@classmethod
+	def register_parameters(cls, prefix, subparsers):
+		parser = cls.create_parser(prefix, subparsers)
+
+	async def execute(self, args):
+		text = self.dispatcher.parser.format_help()
+		await self.msg.channel.send(text)
+
+class ShowUsage(Command):
+	name = "usage"
+
+	@classmethod
+	def register_parameters(cls, prefix, subparsers):
+		parser = cls.create_parser(prefix, subparsers)
+
+	async def execute(self, args):
+		text = self.dispatcher.parser.format_usage()
+		await self.msg.channel.send(text)
