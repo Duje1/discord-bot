@@ -34,6 +34,19 @@ class ChooseOption(Command):
 		option = choice(args.options)
 		await self.msg.channel.send(f"Randomly selected: {option}")
 
+class Poll(Command):
+	name = "poll"
+
+	@classmethod
+	def register_parameters(cls, prefix, subparsers):
+		parser = cls.create_parser(prefix, subparsers)
+		parser.add_argument('question', type=str, help="Question inside quotation marks")
+
+	async def execute(self, args):
+		bot_message = await self.msg.channel.send(args.question)
+		await bot_message.add_reaction(u"👍")
+		await bot_message.add_reaction(u"👎")
+
 class ShowHelp(Command):
 	name = "help"
 

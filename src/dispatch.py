@@ -6,11 +6,12 @@ import shlex
 from discord.errors import NotFound
 
 from permissions import check_roles, check_scope
-from commands.general import DeleteMsg, ChooseOption, ShowHelp, ShowUsage
+from commands.general import DeleteMsg, ChooseOption, Poll, ShowHelp, ShowUsage
 
 COMMANDS = [
 	DeleteMsg,
 	ChooseOption,
+	Poll,
 	ShowHelp,
 	ShowUsage,
 ]
