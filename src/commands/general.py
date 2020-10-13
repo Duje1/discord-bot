@@ -48,8 +48,8 @@ class Poll(Command):
 
 	async def show_yes_no(self, question):
 		bot_message = await self.msg.channel.send(f'**{question}**')
-		await bot_message.add_reaction(u"👍")
-		await bot_message.add_reaction(u"👎")
+		await bot_message.add_reaction("\U0001F44D")
+		await bot_message.add_reaction("\U0001F44E")
 
 	async def show_options(self, question, options):
 		embed = Embed(title=question, colour=Colour.from_rgb(59,136,195))	
