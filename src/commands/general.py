@@ -4,6 +4,8 @@ from command import Command
 from server import ROLE_TESTROLE, CHANNEL_1, CATEGORY_TEST
 from discord import Embed, Colour
 
+NUMBERS_EMOJI = ['0\u20E3', '1\u20E3', '2️\u20E3', '3️\u20E3', '4️\u20E3', '5️\u20E3', '6️\u20E3', '7️\u20E3', '8️\u20E3', '9️\u20E3']
+
 def max20(val):
 	num = int(val)
 	if 0 < num <= 20:
@@ -45,19 +47,20 @@ class Poll(Command):
 		parser.add_argument('options', nargs='*', type=str, help="Space-separated options", action="extend", default=None)
 
 	async def show_yes_no(self, question):
-		bot_message = await self.msg.channel.send('**{}**'.format(question))
+		bot_message = await self.msg.channel.send(f'**{question}**')
 		await bot_message.add_reaction(u"👍")
 		await bot_message.add_reaction(u"👎")
 
 	async def show_options(self, question, options):
 		embed = Embed(title=question, colour=Colour.from_rgb(59,136,195))	
-		reactions = [':zero:', ':one:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:']
-		#emojis_ids = [765577566803198002, 765577567993593896, 765577569097089084]
 
 		for index, option in enumerate(options):
-			embed.add_field(name=reactions[index], value=option, inline=False)
+			embed.add_field(name=NUMBERS_EMOJI[index], value=option, inline=False)
 
-		await self.msg.channel.send('\n', embed=embed)
+		embed_message = await self.msg.channel.send('\n', embed=embed)
+
+		for index, option in enumerate(options):
+			await embed_message.add_reaction(NUMBERS_EMOJI[index])
 
 	async def execute(self, args):
 		options = args.options
