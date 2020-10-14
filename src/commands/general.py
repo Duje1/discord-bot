@@ -59,7 +59,7 @@ class Poll(Command):
 
 		embed_message = await self.msg.channel.send('\n', embed=embed)
 
-		for index, option in enumerate(options):
+		for index in range(len(options)):
 			await embed_message.add_reaction(NUMBERS_EMOJI[index])
 
 	async def execute(self, args):
