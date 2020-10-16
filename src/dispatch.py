@@ -1,4 +1,3 @@
-from argparse import ArgumentParser
 from traceback import format_exc
 from contextlib import suppress
 import shlex
@@ -6,39 +5,18 @@ import shlex
 from discord.errors import NotFound
 
 from permissions import check_roles, check_scope
-from commands.general import DeleteMsg, ChooseOption, ShowHelp, ShowUsage
+from commands.general import DeleteMsg, ChooseOption, Poll, ShowHelp, ShowUsage
+from parser import CommandParsingError, CommandHelpError, CommandParser
 
 COMMANDS = [
 	DeleteMsg,
 	ChooseOption,
+	Poll,
 	ShowHelp,
 	ShowUsage,
 ]
 
 COMMAND_PREFIX = "/"
-
-class CommandParsingError(Exception):
-	def __init__(self, message):
-		self.message = message
-
-class CommandHelpError(Exception):
-	def __init__(self, message):
-		self.message = message
-
-class CommandParser(ArgumentParser):
-	def error(self, message):
-		raise CommandParsingError(message)
-
-	def exit(self, status=0, message=None):
-		raise CommandParsingError(message)
-
-	def print_help(self, file=None):
-		message = self.format_help()
-		raise CommandHelpError(message)
-
-	def print_usage(self, file=None):
-		message = self.format_usage()
-		raise CommandHelpError(message)
 
 class Dispatcher(object):
 	def __init__(self, client):
