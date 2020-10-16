@@ -50,9 +50,17 @@ class Dispatcher(object):
 			command.register_parameters(COMMAND_PREFIX, subparsers)
 
 	async def dispatch(self, msg):
-		text = msg.content.split('\n', 1)[0]
-		if not text.startswith(COMMAND_PREFIX):
+		first_line = msg.content.split('\n', 1)[0]
+		subcommand = shlex.split(first_line)[0]
+		if not subcommand.startswith(COMMAND_PREFIX):
 			return
+		
+		text = first_line
+		for command in COMMANDS:
+			if COMMAND_PREFIX + command.name == subcommand:
+				if command.multiline:
+					text = msg.content
+				break
 
 		try:
 			args = self.parser.parse_args(shlex.split(text))

@@ -7,6 +7,7 @@ class Command(ABC):
 	channels = []
 	categories = []
 	delete_msg = False
+	multiline = False
 
 	def __init__(self, client, msg, dispatcher):
 		self.client = client
