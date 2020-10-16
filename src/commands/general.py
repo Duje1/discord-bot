@@ -39,6 +39,8 @@ class ChooseOption(Command):
 
 class Poll(Command):
 	name = "poll"
+	multiline = True
+	delete_msg = True
 
 	@classmethod
 	def register_parameters(cls, prefix, subparsers):
