@@ -1,12 +1,14 @@
 from random import choice
 from argparse import Action
+import re
+import os
+
+import yaml
 
 from command import Command
 from server import ROLES, CHANNELS, CATEGORIES, NUMBERS_EMOJI
 from discord import Embed, Colour
 from parser import CommandParsingError
-import os
-import yaml
 
 def max20(val):
 	num = int(val)
@@ -112,7 +114,7 @@ class ShowUsage(Command):
 		text = self.dispatcher.parser.format_usage()
 		await self.msg.channel.send(text)
 
-class sendWelcomeMsg(Command):
+class SendWelcomeMsg(Command):
 	name = "start"
 	delete_msg = True
 	roles = [ROLES.get("ADMIN")]
@@ -125,9 +127,17 @@ class sendWelcomeMsg(Command):
 	async def execute(self, args):
 		guild_name = self.msg.guild.name
 		invite_link = "https://discord.gg/NhhXgtM"
-		with open(os.path.abspath("wlcm.yaml"), 'r') as w_file:
-			dictionary = yaml.load(w_file, Loader=yaml.FullLoader)
-			for key, value in dictionary.items():
-				await self.msg.channel.send(str(value).replace("$sn",guild_name).replace("$il",invite_link))
+		
+		with open("welcome.yaml", 'r') as f:
+			welcome_info = yaml.load(f, Loader=yaml.FullLoader)
+
+		output = []
+		for topic, body in welcome_info.items():
+			text = str(body)
+			text = re.sub(r"\$SERVER_NAME(?!\w)", guild_name, text)
+			text = re.sub(r"\$INVITE_LINK(?!\w)", invite_link, text)
+			output.append(text)
+
+		await self.msg.channel.send("\n".join(output))
 
    

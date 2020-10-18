@@ -5,7 +5,7 @@ import shlex
 from discord.errors import NotFound
 from server import COMMAND_PREFIX
 from permissions import check_roles, check_scope
-from commands.general import DeleteMsg, ChooseOption, Poll, ShowHelp, ShowUsage, sendWelcomeMsg
+from commands.general import DeleteMsg, ChooseOption, Poll, ShowHelp, ShowUsage, SendWelcomeMsg
 from parser import CommandParsingError, CommandHelpError, CommandParser
 
 COMMANDS = [
@@ -14,10 +14,8 @@ COMMANDS = [
 	Poll,
 	ShowHelp,
 	ShowUsage,
-	sendWelcomeMsg
+	SendWelcomeMsg
 ]
-
-
 
 class Dispatcher(object):
 	def __init__(self, client):

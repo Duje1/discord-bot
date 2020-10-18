@@ -1,6 +1,6 @@
 --- 
  head: "***WELCOME***"
- server-name: "🔥 $sn greeting you"
+ server-name: "🔥 $SERVER_NAME greeting you"
  head_ru: "\n***RULES***"
  rules: |
    ```
@@ -21,4 +21,4 @@
    *everyone can have no more 3 roles. ~~except admin~~ ^^*
 
  head_w: "\n***INVITE***"
- invite: $il
+ invite: "$INVITE_LINK"
