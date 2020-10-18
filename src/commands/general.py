@@ -1,5 +1,5 @@
 from random import choice
-
+import random
 from command import Command
 from server import ROLE_TESTROLE, CHANNEL_1, CATEGORY_TEST
 
@@ -55,3 +55,31 @@ class ShowUsage(Command):
 	async def execute(self, args):
 		text = self.dispatcher.parser.format_usage()
 		await self.msg.channel.send(text)
+
+class _8ball(Command):
+	name = "8ball"
+	@classmethod
+	def register_parameters(cls, prefix, subparsers):
+			parser = cls.create_parser(prefix, subparsers)
+			parser.add_argument('question',type=str,help="/8ball -question-")
+	async def execute(self,args):
+		responses =['As I see it, yes.',
+ 				'Ask again later.',
+ 				'Better not tell you now.',
+ 				'Cannot predict now.',
+ 				'Concentrate and ask again.',
+ 				'Don’t count on it.',
+ 				'It is certain.',
+ 				'It is decidedly so.',
+ 				'Most likely.',
+ 				'My reply is no.',
+ 				'My sources say no.',
+ 				'Outlook not so good.',
+				'Reply hazy, try again.',
+				'Signs point to yes.',
+				'Very doubtful.',
+				'Without a doubt.',
+				'Yes.',
+				'Yes – definitely.',
+				'You may rely on it.']
+		await self.msg.channel.send(f'Question: {args.question} \nAnswer: {random.choice(responses)}')
