@@ -2,12 +2,11 @@ from random import choice
 from argparse import Action
 
 from command import Command
-from server import ROLE_TESTROLE, CHANNEL_1, CATEGORY_TEST
+from server import ROLES, CHANNELS, CATEGORIES, NUMBERS_EMOJI
 from discord import Embed, Colour
 from parser import CommandParsingError
-
-
-NUMBERS_EMOJI = ['0\u20E3', '1\u20E3', '2️\u20E3', '3️\u20E3', '4️\u20E3', '5️\u20E3', '6️\u20E3', '7️\u20E3', '8️\u20E3', '9️\u20E3']
+import os
+import yaml
 
 def max20(val):
 	num = int(val)
@@ -108,7 +107,27 @@ class ShowUsage(Command):
 	@classmethod
 	def register_parameters(cls, prefix, subparsers):
 		parser = cls.create_parser(prefix, subparsers)
-
+  
 	async def execute(self, args):
 		text = self.dispatcher.parser.format_usage()
 		await self.msg.channel.send(text)
+
+class sendWelcomeMsg(Command):
+	name = "start"
+	delete_msg = True
+	roles = [ROLES.get("ADMIN")]
+	# channels = [CHANNELS.get("WLCM")]
+
+	@classmethod
+	def register_parameters(cls,prefix,subparsers):
+		parser = cls.create_parser(prefix, subparsers)
+	
+	async def execute(self, args):
+		guild_name = self.msg.guild.name
+		invite_link = "https://discord.gg/NhhXgtM"
+		with open(os.path.abspath("wlcm.yaml"), 'r') as w_file:
+			dictionary = yaml.load(w_file, Loader=yaml.FullLoader)
+			for key, value in dictionary.items():
+				await self.msg.channel.send(str(value).replace("$sn",guild_name).replace("$il",invite_link))
+
+   
