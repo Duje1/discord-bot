@@ -1,0 +1,24 @@
+--- 
+ head: "***WELCOME***"
+ server-name: "🔥 $SERVER_NAME greeting you"
+ head_ru: "\n***RULES***"
+ rules: |
+   ```
+   1. Be Nice 
+   2. ...
+   ```
+ warning_rule: |
+   ❗*follow the rules, please. otherwise*
+
+    - Warning
+    - 3-day Discord Ban
+    - 2-week Discord Ban
+    - Permanent Discord Ban
+
+
+ head_ra: "\n***SERVER RANKS***"
+ ranks: |
+   *everyone can have no more 3 roles. ~~except admin~~ ^^*
+
+ head_w: "\n***INVITE***"
+ invite: "$INVITE_LINK"
