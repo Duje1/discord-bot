@@ -3,7 +3,7 @@ from contextlib import suppress
 import shlex
 
 from discord.errors import NotFound
-from server import COMMAND_PREFIX
+from server.general import COMMAND_PREFIX
 from permissions import check_roles, check_scope
 from commands.general import DeleteMsg, ChooseOption, Poll, ShowHelp, ShowUsage, SendWelcomeMsg
 from parser import CommandParsingError, CommandHelpError, CommandParser
