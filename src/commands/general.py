@@ -127,8 +127,7 @@ class SendWelcomeMsg(Command):
 	
 	async def execute(self, args):
 		guild_name = self.msg.guild.name
-		invite_link = "https://discord.gg/NhhXgtM"
-		
+
 		with open("welcome.yaml", 'r') as f:
 			welcome_info = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -136,7 +135,7 @@ class SendWelcomeMsg(Command):
 		for topic, body in welcome_info.items():
 			text = str(body)
 			text = re.sub(r"\$SERVER_NAME(?!\w)", guild_name, text)
-			text = re.sub(r"\$INVITE_LINK(?!\w)", invite_link, text)
+			text = re.sub(r"\$INVITE_LINK(?!\w)", INVITE_LINK, text)
 			output.append(text)
 
 		await self.msg.channel.send("\n".join(output))
