@@ -6,7 +6,8 @@ import os
 import yaml
 
 from command import Command
-from server import ROLES, CHANNELS, CATEGORIES, NUMBERS_EMOJI
+from server.roles import ADMIN
+from server.general import NUMBERS_EMOJI, INVITE_LINK
 from discord import Embed, Colour
 from parser import CommandParsingError
 
@@ -117,8 +118,8 @@ class ShowUsage(Command):
 class SendWelcomeMsg(Command):
 	name = "start"
 	delete_msg = True
-	roles = [ROLES.get("ADMIN")]
-	# channels = [CHANNELS.get("WLCM")]
+	roles = [ADMIN]
+	# channels = [WELCOME]
 
 	@classmethod
 	def register_parameters(cls,prefix,subparsers):
